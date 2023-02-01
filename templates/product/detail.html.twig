@@ -7,13 +7,14 @@
 
 {% block body %}
 
-<h2 class="titlePage">{{titre}} {{product.nom}}</h2>
+<h2 class="titlePage">{{product.name}}</h2>
 
 <div class="product">
+    
+    <img src="../images/{{product.image}}" alt="{{product.image}}">
     <p>{{product.description}}</p>
-    <img src="{{product.image}}" alt="{{product.image}}">
-    <div classe="prix">
-        <p class="priceStyle">Le prix est de : {{product.prix}}€</p>
+    <div class="prix">
+        <p class="priceStyle">Le prix est de {{product.price}}€</p>
         <a class="btn btn-success" href="#">Acheter</a>
     </div>
 </div>
