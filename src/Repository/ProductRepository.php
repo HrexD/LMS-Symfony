@@ -17,13 +17,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function getData():Query{
-        return $this->createQueryBuilder('p')
-            ->select('p.id', 'p.name', 'p.slug', 'p.description', 'p.price', 'p.image')
-            ->orderBy(RAND()) 
-            -> setMaxResults(3) 
-            ->getQuery();
-    }
+  
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -46,6 +40,33 @@ class ProductRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+        
+    }
+
+      public function getData():array
+      {
+        return $this->createQueryBuilder('p')
+            ->orderBy('RAND()') 
+            ->setMaxResults(3) 
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countProducts():int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+    public function getProducts(int $offset, int $limit):array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

@@ -23,7 +23,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/products', name: 'products')]
+    #[Route('/products/page/{page}', name: 'products')]
     public function index():Response
     {
         $products = $this->productRepository->findAll();
