@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{% for category in categories %}
+  <button type="button" class="btn btn-dark">
+
+<span class="badge badge-light">{{ category.name }} {{ category.count}}</span>
+
+</button>
+{% endfor %}
+{% endblock %}
+

@@ -24,13 +24,13 @@ class ProductController extends AbstractController
     }
 
     #[Route('/products/page/{page}', name: 'products')]
-    public function index():Response
+    public function index(int $page):Response
     {
-        $products = $this->productRepository->findAll();
-    
-        
+       
+        $products = $this->productRepository->getProducts(($page - 1) * 12);
+       // $count = $this->productRepository->countProducts();
         return $this->render('product/index.html.twig', [
-            'products' => $products
+            'page' => $page, "products" => $products
         ]);
     }
 

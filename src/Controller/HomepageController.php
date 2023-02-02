@@ -16,9 +16,8 @@ class HomepageController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function index():Response
     {
-$product= $this->ProductRepository->getData();
-        return $this->render('product/index.html.twig', [
-            'products' => $product,
+
+        return $this->render('homepage/index.html.twig', [
         ]);
         
     }

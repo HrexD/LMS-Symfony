@@ -59,12 +59,21 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
-    public function getProducts(int $offset, int $limit):array
+    public function getProducts(int $offset):array
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.id', 'DESC')
+            ->orderBy('p.id', 'ASC')
             ->setFirstResult($offset)
-            ->setMaxResults($limit)
+            ->setMaxResults(12)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function search(string $search):array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.name LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
             ->getQuery()
             ->getResult();
     }
